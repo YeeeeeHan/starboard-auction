@@ -1,3 +1,5 @@
+exports.createAuction = require("./auction-factory/create-new-auction")
+exports.getAuctions = require("./auction-factory/get-auctions")
 exports.getBalance = require("./simple-coin/get-balance")
 exports.getAddress = require("./get-address")
 exports.sendCoin = require("./simple-coin/send-coin")

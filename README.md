@@ -1,5 +1,113 @@
-# FEVM Hardhat Kit
+# Setting up the project
 
+## Installing dependencies
+Install dependencies
+```bash
+yarn install
+```
+
+## Setting up .env
+Replace `.env.exmaple` with `.env`, with the following content:
+```bash
+PRIVATE_KEY="Your-private-key"
+```
+
+## Running tests
+In order to run tests: 
+```bash
+npx hardhat test
+```
+
+## Deploying Auction Factory Contract
+In order to deploy auction factory contract: 
+```bash
+npx hardhat run deploy/deploy-auction-factory.js --network Hyperspace
+```
+-----
+# Application Design
+
+## Overview
+
+For this assignment, I worked on 2 different code bases:
+- Front-end: https://github.com/YeeeeeHan/starboard-frontend
+- Smart-contract: https://github.com/YeeeeeHan/starboard-frontend
+
+Visit the deployed front-end demo here: https://starboard-frontend-git-main-yeeeeehan.vercel.app/. The front-end is created using Next.js, adapted from the [ethereum-boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate) project. 
+
+
+**Relevant files**:
+
+- Auction Factory and Auction smart contracts: @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+- NFT smart contract
+- Test cases
+- Deployment scripts
+
+
+## Foreword
+I would like to preface the fact that I might still be unfamiliar with the whole filecoin ecosystem, but I will work within my best understanding of the ecosystem. Filecoin is a solution to allow clients (bidders) to store files for a fee, and allow storage providers too earn some reward for storing the formers' files. 
+
+However, the current match-making process for clients and storage providers contains some friction, that is, clients will have to identify potential storage providers and go through a price negotation process until both parties agree on the terms of the deal. The deal is then published on-chain. The price discovery process could be replaced with an auction mechanism, where storage providers auction off their storage spaces, and clients bid for the prices they are willing to pay. This allows the market forces to be at play to make the market for efficient. 
+
+Therefore, my understanding of this assignment's requirement is to build an auction system to allow storage providers to create auctions, while allowing clients to put in their bids for the corresponding storage. Upon completion, the system should integrate with the zondax API to streamline the process of deal creation, where the deal is publish on-chain.
+
+
+## Application Design
+
+![](readmeassets/overview1.png)
+The above shows the overview architecture for the auction process. There are 3 main actors in the process: **Deployer**, **Storage Provider**, and **Bidders**. The **Deployer** is involved with deploying the `AuctionFactory` smart contract, which in turn deploys the ERC721 smart contract. There will only be one AuctionFactory smart contract instance, while will be responsible for the creation of subsequent Auction smart contracts. This also means that there will only be 1 ERC721 smart contract deployed, with each additional Auction instance having their own NFT token (i.e. unique TokenID but sharing the same ERC721 smart contract).
+
+The **Storage Provider** will be creating auctions by calling `createAuction(biddingTime)` on the `AuctionFactory` smart contract, which will deploy a new Auction Contract. `biddingTime` is the duration of the auction is ms,  
+
+The **Bidders** will proceed to place bids by calling `bid()` on the `Auction` smart contract. Whenever, there is a higher bid, the `Auction` smart contract will store the address of the highest bidder. The bidder that under-bidded can call `withdraw()` **after the auction ends**, in order to retrieve his under-bid. 
+
+
+
+## Factory Contract
+
+## Auction Contract
+
+## NFT Contract
+
+## Requirements
+
+## Test Cases
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------
 ## Cloning the Repo
 
 Open up your terminal (or command prompt) and navigate to a directory you would like to store this code on. Once there type in the following command:

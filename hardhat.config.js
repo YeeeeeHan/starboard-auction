@@ -10,14 +10,15 @@ module.exports = {
     solidity: {
         version: "0.8.17",
         settings: {
-          optimizer: {
-            enabled: true,
-            runs: 1000,
-            details: { yul: false },
-          },
+            optimizer: {
+                enabled: true,
+                runs: 1000,
+                details: { yul: false },
+            },
         },
-      },
-    defaultNetwork: "Hyperspace",
+    },
+    defaultNetwork: "hardhat",
+    // defaultNetwork: "Hyperspace",
     networks: {
         Localnet: {
             chainId: 31415926,
@@ -40,5 +41,9 @@ module.exports = {
         tests: "./test",
         cache: "./cache",
         artifacts: "./artifacts",
+    },
+    plugins: ["@nomiclabs/hardhat-ethers"],
+    mocha: {
+        timeout: 80000, // set global timeout to 10000ms
     },
 }
